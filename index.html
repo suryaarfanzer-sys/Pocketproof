@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#101827">
+<meta name="description" content="Keep valuables, receipts, serial numbers, and warranty dates organized in one private place.">
+<title>PocketProof — Your Personal Item Vault</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brandmark">P<span>✓</span></div>
+  <div class="brandcopy"><div class="brandname">PocketProof</div><div class="tagline">Your valuables. One safe place.</div></div>
+  <button id="notifyBtn" class="iconbutton" title="Enable reminders" aria-label="Enable reminders">♧</button>
+  <button id="exportBtn" class="iconbutton" title="Export backup" aria-label="Export backup">⇩</button>
+</header>
+<main>
+  <section class="hero">
+    <div class="eyebrow">PERSONAL ITEM VAULT</div>
+    <h1>Know what you own.<br><span>Never miss a warranty.</span></h1>
+    <p>Keep purchase details, receipts, serial numbers, and warranty dates organized in one private place.</p>
+    <button id="addTop" class="primary">＋ Add an item</button>
+  </section>
+  <section class="stats">
+    <article><span class="statlabel">TOTAL ITEMS</span><strong id="totalCount">0</strong></article>
+    <article><span class="statlabel">ACTIVE WARRANTIES</span><strong id="activeCount">0</strong></article>
+    <article><span class="statlabel">EXPIRING IN 30 DAYS</span><strong id="soonCount">0</strong></article>
+  </section>
+  <section class="listsection">
+    <div class="sectionhead"><div><div class="eyebrow">YOUR COLLECTION</div><h2>Saved items</h2></div><span id="itemPill" class="pill">0 items</span></div>
+    <label class="searchbox"><span>⌕</span><input id="search" type="search" placeholder="Search name, brand, serial…"></label>
+    <div class="filters">
+      <select id="filterStatus" aria-label="Filter by warranty status"><option value="all">All warranties</option><option value="active">Active</option><option value="soon">Expiring soon</option><option value="expired">Expired</option><option value="none">No expiry date</option></select>
+      <select id="sortBy" aria-label="Sort items"><option value="recent">Recently added</option><option value="expiry">Warranty expiry</option><option value="name">Name A–Z</option></select>
+    </div>
+    <div id="items" class="items"></div>
+    <div id="empty" class="empty"><div class="emptyicon">▣</div><h3>Your vault starts here</h3><p>Add a laptop, phone, appliance, or anything you want to keep track of.</p><button id="emptyAdd" class="secondary">Add your first item</button></div>
+  </section>
+  <section class="privacy"><div class="lock">⌑</div><div><strong>Private by design</strong><p>Your records are stored in this browser on this device. Export a backup regularly. This starter does not sync data to a cloud account.</p></div></section>
+  <section class="premium">
+    <div><div class="eyebrow">POCKETPROOF PLUS</div><h2>More peace of mind.</h2><p>Premium is planned to include unlimited items, richer reports, and expanded backup tools.</p></div>
+    <span class="comingsoon">COMING SOON</span>
+  </section>
+  <footer><span>PocketProof · Candidate build</span><span>Local storage · No account required</span></footer>
+</main>
+<div id="modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="sheet">
+    <div class="sheethead"><div><div class="eyebrow">ITEM DETAILS</div><h2 id="modalTitle">Add an item</h2></div><button id="closeModal" class="iconbutton" aria-label="Close">×</button></div>
+    <form id="itemForm">
+      <input type="hidden" id="itemId">
+      <label>Item name *<input id="name" required maxlength="80" placeholder="e.g. Laptop"></label>
+      <div class="two"><label>Brand<input id="brand" maxlength="60" placeholder="e.g. Lenovo"></label><label>Category<select id="category"><option>Electronics</option><option>Home appliance</option><option>Furniture</option><option>Vehicle</option><option>Jewelry</option><option>Other</option></select></label></div>
+      <label>Serial number / model<input id="serial" maxlength="100" placeholder="Optional"></label>
+      <div class="two"><label>Purchase date<input id="purchaseDate" type="date"></label><label>Warranty expiry<input id="warrantyDate" type="date"></label></div>
+      <label>Purchase price <span class="hint">(optional, enter amount in your currency)</span><input id="price" type="number" min="0" step="0.01" placeholder="e.g. 750"></label>
+      <label>Receipt / item photo <input id="photo" type="file" accept="image/*"><span class="hint">Stored in this browser only. Large images may use significant device storage.</span></label>
+      <div id="photoPreviewWrap" class="photo-preview hidden"><img id="photoPreview" alt="Receipt or item preview"><button id="removePhoto" class="smallbtn" type="button">Remove photo</button></div>
+      <label>Notes<textarea id="notes" rows="3" maxlength="1000" placeholder="Coverage details, receipt location…"></textarea></label>
+      <div class="formactions"><button type="button" id="cancel" class="secondary">Cancel</button><button class="primary" type="submit">Save item</button></div>
+    </form>
+  </div>
+</div>
+<div id="toast" class="toast" role="status"></div>
+<input type="file" id="importFile" accept="application/json,.json" hidden>
+<script src="app.js"></script>
+</body></html>

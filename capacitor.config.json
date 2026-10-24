@@ -1,0 +1,6 @@
+{
+  "appId": "com.pocketproof.app",
+  "appName": "PocketProof",
+  "webDir": ".",
+  "bundledWebRuntime": false
+}
